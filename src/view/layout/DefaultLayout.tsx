@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Header, Nav, Footer } from "@src/component/index";
-import Main from "@src/assets/imgs/main.jpg";
+import AppContents from "@src/component/AppContents";
 
 const DefaultLayout = () => {
     return (
         <body>
-            <Header></Header>
-            <Nav></Nav>
-            <img src={Main} alt="" />
-            <Footer></Footer>
+            <Header />
+            <Nav />
+            <AppContents />
+            <Footer />
         </body>
     );
 };

@@ -19,7 +19,6 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts start",
         "dev": "webpack-dev-server --config config/webpack.dev.js",
         "prod": "webpack-dev-server --config config/webpack.prod.js",
         "build:dev": "webpack --config config/webpack.dev.js",

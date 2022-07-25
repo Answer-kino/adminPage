@@ -1,3 +1,6 @@
 config/**
 dist/**
 src/utility/Reg.ts
+src/App.tsx
+src/route.tsx
+src/component/AppContents.tsx

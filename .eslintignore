@@ -1,0 +1,3 @@
+config/**
+dist/**
+src/utility/Reg.ts

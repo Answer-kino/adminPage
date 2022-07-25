@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
+import Spinner from "./component/common/Spinner";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import DefaultLayout from "./view/layout/DefaultLayout";
+
+const App = () => {
+    return (
+        <HashRouter>
+            <Suspense fallback={<Spinner />}></Suspense>
+            <Routes>
+                <Route path="*" element={<DefaultLayout />}></Route>
+            </Routes>
+        </HashRouter>
+    );
+};
 
 export default App;

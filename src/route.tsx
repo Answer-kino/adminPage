@@ -1,16 +1,20 @@
-// @ts-nocheck
 import React from "react";
 
-// Import Example
-
 const Home = React.lazy(() => import("@src/view/pages/home/Home"));
-// Login Page
-const Login = React.lazy(() => import("@src/view/pages/login/Login"));
+const ContentsViewPage = React.lazy(() => import("@src/view/pages/contents/View"));
+const ArchitectViewPage = React.lazy(() => import("@src/view/pages/architect/View"));
+const CustomerViewPage = React.lazy(() => import("@src/view/pages/customer/View"));
 
 const routes = [
     { path: "/", exact: true, home: "Home" },
-    { path: "/home", name: "Home", element: Home, exact: true },
-    { path: "/login", name: "Login", element: Login, exact: true }
+    { path: "/home", name: "홈", element: Home },
+    { path: "/contents", name: "콘텐츠", element: ContentsViewPage },
+    { path: "/contents/regist", name: "콘텐츠 추가", element: ContentsViewPage },
+    { path: "/contents/modify", name: "콘텐츠 수정", element: ContentsViewPage },
+    { path: "/architect", name: "건축가", element: ArchitectViewPage },
+    { path: "/architect/regist", name: "건축가 추가", element: ArchitectViewPage },
+    { path: "/architect/modify", name: "건축가 수정", element: ArchitectViewPage },
+    { path: "/customer", name: "회원", element: CustomerViewPage }
 ];
 
 export default routes;

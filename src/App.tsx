@@ -1,21 +1,25 @@
-// @ts-nocheck
-import React, { Suspense } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
-import "./index.css";
-import Spinner from "./component/common/Spinner";
+import React, { useState } from "react";
+import { Helmet } from "react-helmet";
+import { ThemeProvider } from "styled-components";
 
-// Containers
-const DefaultLayout = React.lazy(() => import("@src/view/layout/DefaultLayout"));
+import Router from "./Router";
 
+import { darkTheme, lightTheme } from "./assets/style/theme";
+import { GlobalStyle } from "./assets/style/globalStyles";
+
+export const ThemeContext = React.createContext<any>(null);
 const App = () => {
+    const [theme, setTheme] = useState("light");
+    const themeStyle = theme === "light" ? lightTheme : darkTheme;
+
     return (
-        <HashRouter>
-            <Suspense fallback={<Spinner />}>
-                <Routes>
-                    <Route path="*" element={<DefaultLayout />}></Route>
-                </Routes>
-            </Suspense>
-        </HashRouter>
+        <ThemeContext.Provider value={{ setTheme, theme }}>
+            <ThemeProvider theme={themeStyle}>
+                <GlobalStyle />
+                <Helmet></Helmet>
+                <Router />
+            </ThemeProvider>
+        </ThemeContext.Provider>
     );
 };
 

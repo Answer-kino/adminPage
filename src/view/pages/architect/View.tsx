@@ -16,8 +16,11 @@ import {
 } from "@src/assets/style/view/view";
 
 import { Pagination } from "@src/component/pagination/Pagination";
+import { Path } from "@src/model/common/Path";
+import { useNavigate } from "react-router-dom";
 
 function View() {
+    const navigate = useNavigate();
     const [tabNum, setTabNum] = useState<number>(0);
 
     const [test, setTest] = useState([]);
@@ -40,7 +43,13 @@ function View() {
                         전체 목록(100)
                     </STab>
                 </STabs>
-                <STabButton>추가하기</STabButton>
+                <STabButton
+                    onClick={() => {
+                        navigate(Path.Architect("regist"));
+                    }}
+                >
+                    추가하기
+                </STabButton>
             </SViewHeader>
 
             <STableContainer>

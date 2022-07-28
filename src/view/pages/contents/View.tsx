@@ -16,10 +16,12 @@ import {
 } from "@src/assets/style/view/view";
 
 import { Pagination } from "@src/component/pagination/Pagination";
+import { useNavigate } from "react-router-dom";
+import { Path } from "@src/model/common/Path";
 
 function View() {
+    const navigate = useNavigate();
     const [tabNum, setTabNum] = useState<number>(0);
-
     const [test, setTest] = useState([]);
     const [isViewCount, setIsViewCount] = useState<number>(10);
     const [isLimit, setIsLimit] = useState<number>(isViewCount);
@@ -46,7 +48,13 @@ function View() {
                         비활성화(100)
                     </STab>
                 </STabs>
-                <STabButton>추가하기</STabButton>
+                <STabButton
+                    onClick={() => {
+                        navigate(Path.Contents("regist"));
+                    }}
+                >
+                    추가하기
+                </STabButton>
             </SViewHeader>
 
             <STableContainer>

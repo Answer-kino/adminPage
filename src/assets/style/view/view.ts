@@ -27,7 +27,7 @@ export const STab = styled.li`
     line-height: 40px;
     text-align: center;
     cursor: pointer;
-    background: ${({ theme, isAction }: any) => (!isAction ? theme.bg4 : theme.bg3)};
+    background: ${({ theme, isAction }: any) => (!isAction ? theme.bg3 : theme.bg4)};
     &:first-child {
         border-left: 1px solid ${({ theme }) => theme.bg3};
     }

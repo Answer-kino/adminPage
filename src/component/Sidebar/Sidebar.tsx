@@ -26,6 +26,7 @@ import { AiOutlineAudit, AiOutlineDatabase, AiOutlineHome, AiOutlineLeft, AiOutl
 
 import { ThemeContext } from "@src/App";
 import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Sidebar = ({ children }: any) => {
     const searchRef = useRef<any>();

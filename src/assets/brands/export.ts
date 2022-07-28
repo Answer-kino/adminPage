@@ -1,3 +1,20 @@
+import Logo_Blue_XXXS from "@src/assets/brands/Logo_Blue_XXXS.svg";
+import Logo_Blue_XXL from "@src/assets/brands/Logo_Blue_XXL.svg";
+import Logo_Blue_XXS from "@src/assets/brands/Logo_Blue_XXS.svg";
+import Logo_Blue_XL from "@src/assets/brands/Logo_Blue_XL.svg";
+import Logo_Blue_XS from "@src/assets/brands/Logo_Blue_XS.svg";
+import Logo_Blue_L from "@src/assets/brands/Logo_Blue_L.svg";
+import Logo_Blue_M from "@src/assets/brands/Logo_Blue_M.svg";
+import Logo_Blue_S from "@src/assets/brands/Logo_Blue_S.svg";
+import Logo_Orange from "@src/assets/brands/Logo_Orange.svg";
+import Marker_XXXS from "@src/assets/brands/Marker_XXXS.svg";
+import Marker_XXL from "@src/assets/brands/Marker_XXL.svg";
+import Marker_XXS from "@src/assets/brands/Marker_XXS.svg";
+import Marker_XL from "@src/assets/brands/Marker_XL.svg";
+import Marker_XS from "@src/assets/brands/Marker_XS.svg";
+import Marker_L from "@src/assets/brands/Marker_L.svg";
+import Marker_M from "@src/assets/brands/Marker_M.svg";
 import Marker_S from "@src/assets/brands/Marker_S.svg";
 
-export { Marker_S };
+export { Logo_Blue_XXXS, Logo_Blue_XXL, Logo_Blue_XXS, Logo_Blue_XL, Logo_Blue_XS, Logo_Blue_L, Logo_Blue_M, Logo_Blue_S, Logo_Orange };
+export { Marker_XXXS, Marker_XXL, Marker_XXS, Marker_XL, Marker_XS, Marker_L, Marker_M, Marker_S };

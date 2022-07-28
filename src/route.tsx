@@ -7,7 +7,7 @@ const CustomerViewPage = React.lazy(() => import("@src/view/pages/customer/View"
 
 const routes = [
     { path: "/", exact: true, home: "Home" },
-    { path: "/home", name: "홈", element: Home },
+    { path: "/home", name: "대시보드", element: Home },
     { path: "/contents", name: "콘텐츠", element: ContentsViewPage },
     { path: "/contents/regist", name: "콘텐츠 추가", element: ContentsViewPage },
     { path: "/contents/modify", name: "콘텐츠 수정", element: ContentsViewPage },

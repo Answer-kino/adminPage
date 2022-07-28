@@ -35,7 +35,10 @@ const AppContent = () => {
                                             <SHeader>{route.name}</SHeader>
 
                                             <SMain>
+                                                <section>
+                                                <SDivider/>
                                                 <route.element />
+                                                </section>
                                             </SMain>
                                         </>
                                     }

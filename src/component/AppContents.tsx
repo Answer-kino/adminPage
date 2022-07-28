@@ -36,8 +36,8 @@ const AppContent = () => {
 
                                             <SMain>
                                                 <section>
-                                                <SDivider/>
-                                                <route.element />
+                                                    <SDivider />
+                                                    <route.element />
                                                 </section>
                                             </SMain>
                                         </>

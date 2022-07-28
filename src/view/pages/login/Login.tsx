@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import ModalComponent from "@src/component/modal/ModalComponent";
 import Logo_Blue_L from "../../../assets/brands/Logo_Blue_L.svg";
-import check from "@src/assets/imgs/check.png";
 
 const SloginContainer = styled.div`
     display: flex;
@@ -91,6 +91,19 @@ const ScheckBox_box = styled.div`
     font-size: 12px;
 `;
 
+const SloginBtn = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    width: 98px;
+    height: 48px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 40px;
+`;
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [loginCheck, setLoginCheck] = useState(false);
@@ -141,6 +154,7 @@ const Login = () => {
                         <ScheckBox_box>로그인 유지</ScheckBox_box>
                     </ScheckBox>
                 </SloginContent>
+                <SloginBtn>로그인</SloginBtn>
             </SloginBox>
         </SloginContainer>
     );

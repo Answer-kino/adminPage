@@ -4,6 +4,7 @@ import { btnReset, v } from "@src/assets/style/variables";
 import { Link } from "react-router-dom";
 
 export const SSidebar = styled.div`
+    min-width: ${({ isOpen }: any) => (!isOpen ? "auto" : v.sidebarWidth)};
     width: ${({ isOpen }: any) => (!isOpen ? "auto" : v.sidebarWidth)};
     background: ${({ theme }) => theme.bg};
     min-height: 100vh;

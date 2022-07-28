@@ -29,7 +29,7 @@ const SpinnerDiv = styled.div`
     margin-top: -32px;
     margin-left: -32px;
     border-radius: 50%;
-    border: 8px solid transparent;
+    border: 4px solid transparent;
     border-top-color: black;
     border-bottom-color: black;
     animation: ${SpiinerAction} 0.8s ease infinite;

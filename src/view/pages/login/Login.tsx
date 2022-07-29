@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import CustomAxios from "@src/model/common/CustomAxios";
-import Auth from "@src/model/common/Auth";
 import { Config } from "@src/model/common/Config";
 
 import Logo_Blue_L from "../../../assets/brands/Logo_Blue_L.svg";

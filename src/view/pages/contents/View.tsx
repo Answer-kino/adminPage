@@ -21,6 +21,8 @@ import { Path } from "@src/model/common/Path";
 import { Contents } from "@src/model/api/Contents";
 import { imgSrc } from "@src/model/func/ImgSrc";
 import { timeStampHyphen } from "@src/utility/Time";
+import { ICount } from "@src/interface/Contents/View";
+import { IsActive } from "@src/model/func/IsActive";
 
 function View() {
     const navigate = useNavigate();
@@ -30,42 +32,58 @@ function View() {
 
     const [tabNum, setTabNum] = useState<number>(0);
     const [isLimit, setIsLimit] = useState<number>(isViewCount);
-    const [isOffset, setIsOffset] = useState<number>(1);
-
-    const [isTotalCount, setIsTotalCount] = useState();
+    const [isOffset, setIsOffset] = useState<number>(0);
+    const [isActive, setIsActive] = useState<any>();
+    const [isCount, setIsCount] = useState<ICount>();
     const [isListData, setIsListData] = useState([]);
+
     const initList = async () => {
         setIsListData([]);
     };
 
     const getList = async () => {
-        const { data, count } = await Contents.List({ isLimit, isOffset });
-        console.log(isOffset);
-        console.log(isLimit);
+        console.log(isActive);
+        const { data, count } = await Contents.List({ isLimit, isOffset, isActive });
         const { active, totalCount, unActive } = count[0];
-        setIsTotalCount(totalCount);
+        setIsCount({ totalCount, active, unActive });
         setIsListData(data);
     };
-
-    // useEffect(() => {}, []);
 
     useEffect(() => {
         initList();
         getList();
-        console.log("hi");
-    }, [isLimit]);
+    }, [isLimit, isActive]);
+
     return (
         <>
             <SViewHeader>
                 <STabs>
-                    <STab isAction={tabNum === 0} onClick={() => setTabNum(0)}>
-                        전체 목록(100)
+                    <STab
+                        isAction={tabNum === 0}
+                        onClick={() => {
+                            setTabNum(0);
+                            setIsActive(undefined);
+                        }}
+                    >
+                        전체 목록({isCount && isCount?.totalCount})
                     </STab>
-                    <STab isAction={tabNum === 1} onClick={() => setTabNum(1)}>
-                        활성화(100)
+                    <STab
+                        isAction={tabNum === 1}
+                        onClick={() => {
+                            setTabNum(1);
+                            setIsActive(1);
+                        }}
+                    >
+                        활성화({isCount && isCount?.active})
                     </STab>
-                    <STab isAction={tabNum === 2} onClick={() => setTabNum(2)}>
-                        비활성화(100)
+                    <STab
+                        isAction={tabNum === 2}
+                        onClick={() => {
+                            setTabNum(2);
+                            setIsActive(0);
+                        }}
+                    >
+                        비활성화({isCount && isCount?.unActive})
                     </STab>
                 </STabs>
                 <STabButton
@@ -108,7 +126,7 @@ function View() {
                                         <STableData style={{ width: "100px", whiteSpace: "pre-wrap" }}>
                                             <p>{timeStampHyphen(createdDate)}</p>
                                         </STableData>
-                                        <STableData style={{ width: "80px", whiteSpace: "nowrap" }}>{active == 1 ? "" : ""}</STableData>
+                                        <STableData style={{ width: "80px", whiteSpace: "nowrap" }}>{IsActive(active)}</STableData>
                                         <STableData>
                                             <STableButton>수정</STableButton>
                                         </STableData>
@@ -118,34 +136,11 @@ function View() {
                                     </STableRow>
                                 );
                             })}
-                        {/* {test.map(i => {
-                            return (
-                                <STableRow key={i}>
-                                    <STableData style={{ width: "50px", whiteSpace: "pre-wrap" }}>{i}</STableData>
-                                    <STableData style={{ width: "120px", whiteSpace: "pre-wrap" }}>
-                                        <img src="" alt="" style={{ margin: "10px", width: "100px", height: "60px" }} />
-                                    </STableData>
-                                    <STableData style={{ width: "200px", whiteSpace: "pre-wrap" }}>양평 힐링 집 </STableData>
-                                    <STableData style={{ width: "200px", whiteSpace: "pre-wrap" }}>신촌에서 힐링 너무 좋은 집</STableData>
-                                    <STableData style={{ width: "200px", whiteSpace: "pre-wrap" }}>신촌 협소주택 연희동 하우스</STableData>
-                                    <STableData style={{ width: "100px", whiteSpace: "pre-wrap" }}>
-                                        <p>2021-05-05</p>
-                                    </STableData>
-                                    <STableData style={{ width: "80px", whiteSpace: "nowrap" }}>비활성화</STableData>
-                                    <STableData>
-                                        <STableButton>수정</STableButton>
-                                    </STableData>
-                                    <STableData>
-                                        <STableButton>삭제</STableButton>
-                                    </STableData>
-                                </STableRow>
-                            );
-                        })} */}
                     </STableBody>
                 </STable>
             </STableContainer>
             <SDivider />
-            <Pagination isTotalCount={isTotalCount} isViewCount={isViewCount} setIsLimit={setIsLimit} setIsOffset={setIsOffset} />
+            <Pagination isTotalCount={isCount?.totalCount} isViewCount={isViewCount} setIsLimit={setIsLimit} setIsOffset={setIsOffset} />
         </>
     );
 }

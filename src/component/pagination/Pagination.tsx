@@ -113,7 +113,7 @@ export const Pagination = ({ isTotalCount, isViewCount, setIsLimit, setIsOffset 
     }, [isLastPageNum]);
 
     useEffect(() => {
-        const _Offset = 1 + isViewCount * (isNowPageNum - 1);
+        const _Offset = isViewCount * (isNowPageNum - 1);
         const _Limit = isViewCount * isNowPageNum;
 
         setIsOffset(_Offset);

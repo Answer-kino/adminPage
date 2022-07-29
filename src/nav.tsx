@@ -28,10 +28,10 @@ const linksArray = [
     }
 ];
 const secondaryLinksArray = [
-    {
-        label: "Settings",
-        icon: <AiOutlineSetting />
-    },
+    // {
+    //     label: "Settings",
+    //     icon: <AiOutlineSetting />
+    // },
     {
         label: "Logout",
         icon: <AiOutlineLogout />

@@ -20,4 +20,13 @@ export class Path {
                 return "";
         }
     };
+
+    static Cutomer = (src: string) => {
+        switch (src) {
+            case "view":
+                return "/customer/";
+            default:
+                return "";
+        }
+    };
 }

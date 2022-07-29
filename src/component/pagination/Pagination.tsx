@@ -98,16 +98,19 @@ export const Pagination = ({ isTotalCount, isViewCount, setIsLimit, setIsOffset 
         setIsLastPageNum(isMaxPageNum);
     };
 
-    // Pagination Page Init Data
-    useEffect(() => {
-        setIsPageArrHandler();
-    }, [isFristPageNum]);
-
-    // Pagination MaxPageNum Init
+    // Pagination MaxPageNum, LastPageNum Init
     useEffect(() => {
         const count = Math.ceil(isTotalCount / isViewCount);
         setIsMaxPageNum(count);
+        if (count < isPageCount) {
+            setIsLastPageNum(count);
+        }
     }, [isTotalCount]);
+
+    // Pagination Page Init Data
+    useEffect(() => {
+        setIsPageArrHandler();
+    }, [isLastPageNum]);
 
     useEffect(() => {
         const _Offset = 1 + isViewCount * (isNowPageNum - 1);

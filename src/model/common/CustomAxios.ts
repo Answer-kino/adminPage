@@ -5,16 +5,7 @@ import { Config } from "./Config";
 const auth = Auth.getInstance();
 
 export const customAxios: AxiosInstance = axios.create({
-    baseURL: `${Config.server.admin}`,
-    headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        withCredentials: true
-    }
-});
-
-export const customAxiosImgs: AxiosInstance = axios.create({
-    baseURL: `${Config.common.imgs}`,
+    baseURL: Config.server.admin,
     headers: {
         accept: "application/json",
         "content-type": "application/json",
@@ -25,6 +16,7 @@ export const customAxiosImgs: AxiosInstance = axios.create({
 export default class CustomAxios {
     public static async get(endPoint: string) {
         const header = { headers: auth.getHeaderAuth() };
+
         const result = await customAxios.get(endPoint, header);
         return result;
     }

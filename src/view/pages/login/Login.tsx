@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import ModalComponent from "@src/component/modal/ModalComponent";
+import CustomAxios from "@src/model/common/CustomAxios";
+import Auth from "@src/model/common/Auth";
+import { Config } from "@src/model/common/Config";
+
 import Logo_Blue_L from "../../../assets/brands/Logo_Blue_L.svg";
 
 const SloginContainer = styled.div`
@@ -76,20 +80,20 @@ const SloginInputBox_box_input = styled.input`
     padding: 12px 10px;
 `;
 
-const ScheckBox = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 35%;
-    margin-top: 12px;
-`;
+// const ScheckBox = styled.div`
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     width: 35%;
+//     margin-top: 12px;
+// `;
 
-const ScheckBox_inputBox = styled.input``;
+// const ScheckBox_inputBox = styled.input``;
 
-const ScheckBox_box = styled.div`
-    margin-left: 12px;
-    font-size: 12px;
-`;
+// const ScheckBox_box = styled.div`
+//     margin-left: 12px;
+//     font-size: 12px;
+// `;
 
 const SloginBtn = styled.div`
     display: flex;
@@ -105,16 +109,22 @@ const SloginBtn = styled.div`
 `;
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [loginCheck, setLoginCheck] = useState(false);
+    const navigate = useNavigate();
 
-    const emailHandler = (e: any) => {
-        setEmail(e.target.value);
+    const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
+    const handleInputLoginValue = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLoginInfo({ ...loginInfo, [key]: e.target.value });
     };
 
-    const checkLogin = (e: React.MouseEvent<HTMLInputElement>) => {
-        const target = e.target as HTMLInputElement;
-        setLoginCheck(target.checked);
+    const loginHandler = async () => {
+        const res = await CustomAxios.post(Config.admin.login, loginInfo);
+        if (res.data.success) {
+            sessionStorage.setItem("accessToken", res.data.data.accessToken);
+            sessionStorage.setItem("checkSum", res.data.data.checkSum);
+            navigate("/home");
+        } else {
+            alert("로그인 계정이 없습니다.");
+        }
     };
 
     return (
@@ -130,23 +140,11 @@ const Login = () => {
                     <SloginInputBox>
                         <SloginInputBox_box>
                             <SloginInputBox_box_title>아이디</SloginInputBox_box_title>
-                            <SloginInputBox_box_input
-                                type="email"
-                                placeholder="아이디를 입력해주세요"
-                                onBlur={e => {
-                                    emailHandler(e);
-                                }}
-                            />
+                            <SloginInputBox_box_input type="email" placeholder="아이디를 입력해주세요" onChange={handleInputLoginValue("email")} />
                         </SloginInputBox_box>
                         <SloginInputBox_box>
                             <SloginInputBox_box_title>비밀번호</SloginInputBox_box_title>
-                            <SloginInputBox_box_input
-                                type="password"
-                                placeholder="비밀번호를 입력해주세요"
-                                onBlur={e => {
-                                    emailHandler(e);
-                                }}
-                            />
+                            <SloginInputBox_box_input type="password" placeholder="비밀번호를 입력해주세요" onChange={handleInputLoginValue("password")} />
                         </SloginInputBox_box>
                     </SloginInputBox>
                     {/* <ScheckBox>
@@ -154,7 +152,7 @@ const Login = () => {
                         <ScheckBox_box>로그인 유지</ScheckBox_box>
                     </ScheckBox> */}
                 </SloginContent>
-                <SloginBtn>로그인</SloginBtn>
+                <SloginBtn onClick={loginHandler}>로그인</SloginBtn>
             </SloginBox>
         </SloginContainer>
     );

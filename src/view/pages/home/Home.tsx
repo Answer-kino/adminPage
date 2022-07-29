@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import Auth from "@src/model/common/Auth";
 
 import { SDivider } from "@src/component/Sidebar/styles";
 
@@ -38,6 +41,13 @@ const ShomeContent_contentBox_box = styled.div`
 `;
 
 const Home = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const auth = Auth.getInstance();
+        if (!auth.checkSession()) navigate("/login");
+        return;
+    }, []);
+
     return (
         <ShomeContainer>
             <ShomeContent>

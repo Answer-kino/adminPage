@@ -1,16 +1,12 @@
-import { config } from "dotenv";
-config();
-
 export const Config = {
     // back-end-point
     server: {
-        api: "http://api.cm.house/api/",
-        admin: "http://api.cm.house/api/admin/"
+        admin: "http://api.cm.house/admin/"
     },
 
     common: {
         // back-end-img 불러오기
-        imgs: "imgs/"
+        imgs: "http://api.cm.house/imgs/"
     },
 
     admin: {

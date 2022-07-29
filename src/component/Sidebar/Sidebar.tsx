@@ -44,10 +44,6 @@ const Sidebar = ({ children }: any) => {
         }
     };
 
-    useEffect(() => {
-        console.log(pathname);
-    }, [pathname]);
-
     return (
         <SSidebar isOpen={siderbarOpen}>
             <>
@@ -106,7 +102,14 @@ const Sidebar = ({ children }: any) => {
                 return (
                     <SLinkContainer key={label}>
                         <SLink to="" style={!siderbarOpen ? { width: "fit-content" } : {}}>
-                            <SLinkIcon>{icon}</SLinkIcon>
+                            <SLinkIcon
+                                onClick={() => {
+                                    console.log("hi");
+                                    sessionStorage.clear();
+                                }}
+                            >
+                                {icon}
+                            </SLinkIcon>
                             {siderbarOpen && <SLinkLabel>{label}</SLinkLabel>}
                         </SLink>
                     </SLinkContainer>

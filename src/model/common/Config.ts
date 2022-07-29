@@ -4,6 +4,10 @@ export const Config = {
         admin: "http://api.cm.house/admin/"
     },
 
+    mimeType: {
+        contents: ["image/jpeg", "image/png"]
+    },
+
     common: {
         // back-end-img 불러오기
         imgs: "http://api.cm.house/imgs/"

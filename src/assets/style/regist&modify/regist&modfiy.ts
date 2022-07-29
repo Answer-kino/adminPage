@@ -44,6 +44,7 @@ export const SRMImgPreview = styled.div`
     padding: 0 10px;
     border: 1px dashed ${({ theme }) => theme.borderLine};
     background: ${({ theme }) => theme.bg};
+    font-size: 20px;
 `;
 
 export const SRMFooter = styled.div`

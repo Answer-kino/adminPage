@@ -15,6 +15,9 @@ import { SRMBody, SRMCol, SRMContainer, SRMFooter, SRMImgPreview, SRMLeftSide, S
 import { SHashTagBox, SHashTagContainer } from "@src/assets/style/contents/hashTag";
 import { SInput_100p_30, SInput_100_30, SInput_Hidden } from "@src/component/input/styled";
 import { SBtn_100_30, SBtn_50_30 } from "@src/component/btn/styled";
+import { AiOutlineFileImage, AiOutlineFileJpg } from "react-icons/ai";
+import { checkFileType, FileListToArr } from "@src/utility/Files";
+import { Config } from "@src/model/common/Config";
 
 function Regist() {
     const navigate = useNavigate();
@@ -22,8 +25,17 @@ function Regist() {
     const [tabNum, setTabNum] = useState<number>(0);
     const [isHashTag, setIsHashTag] = useState<any>();
     const [isHashTagKey, setIsHashTagKey] = useState<any>();
-    const [isStyleHashTag, setIsStyleHashTag] = useState([]);
 
+    // JSON Data
+    const [isTitle, setIsTitle] = useState({});
+    const [isStyleHashTag, setIsStyleHashTag] = useState([]);
+    const [isImg, setIsImg] = useState([]);
+    const [isArchitect, setIsArchitect] = useState([]);
+    const [isDashBoard, setIsDashBoard] = useState({});
+    const [isHousePlan, setIsHousePlan] = useState({});
+    const [isInterior, setIsInterior] = useState({});
+
+    // HashTag Btn Color & setState & Delete setState
     const clickHashTagHandler = (hashTagKey: string, commonKey: string) => () => {
         const findHashTagToCommonKey = (hashTag: string) => {
             return hashTag === commonKey;
@@ -44,6 +56,32 @@ function Regist() {
         }
     };
 
+    // InputTag setState
+    const setContentsInputData =
+        (obj: string, key = "") =>
+        (e: React.FocusEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            switch (obj) {
+                case "dashBoard":
+                    return setIsDashBoard(prev => ({ ...prev, [key]: value }));
+                case "housePaln":
+                    return setIsHousePlan(prev => ({ ...prev, [key]: value }));
+                case "interior":
+                    return setIsInterior(prev => ({ ...prev, [key]: value }));
+                case "title":
+                    return setIsTitle(prev => ({ ...prev, [key]: value }));
+                case "img":
+                    return setImgHandler(e);
+            }
+        };
+
+    const setImgHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+        let files = e.target.files;
+        if (files) files = checkFileType(files, Config.mimeType.contents);
+        console.log(files);
+    };
+
+    // HashTag 초기 세팅
     useEffect(() => {
         const result = label.data;
         const key = Object.keys(result);
@@ -52,9 +90,6 @@ function Regist() {
         setIsHashTagKey(key);
     }, []);
 
-    useEffect(() => {
-        console.log(isStyleHashTag);
-    }, [isStyleHashTag]);
     return (
         <SRMContainer>
             <SRMBody>
@@ -74,28 +109,29 @@ function Regist() {
                 <SRMCol>
                     <SRMLeftSide>대제목</SRMLeftSide>
                     <SRMRightSide>
-                        <SInput_100p_30 placeRow="right" placeholder="(최대 25자)"></SInput_100p_30>
+                        <SInput_100p_30 placeRow="right" placeholder="(최대 25자)" blurEnvent={setContentsInputData("mainTitle", "mainTitle")}></SInput_100p_30>
                     </SRMRightSide>
                 </SRMCol>
                 <SRMCol>
                     <SRMLeftSide>소제목</SRMLeftSide>
                     <SRMRightSide>
-                        <SInput_100p_30 placeRow="right" placeholder="(최대 25자)"></SInput_100p_30>
+                        <SInput_100p_30 placeRow="right" placeholder="(최대 25자)" blurEnvent={setContentsInputData("subTitle", "subTitle")}></SInput_100p_30>
                     </SRMRightSide>
                 </SRMCol>
                 <SRMCol>
                     <SRMLeftSide>이미지</SRMLeftSide>
                     <SRMRightSide style={{ flexDirection: "column" }}>
-                        <SInput_Hidden ref={fileBtn} type="file" multiple={true} />
+                        <SInput_Hidden ref={fileBtn} type="file" multiple={true} onChange={setContentsInputData("img")} />
                         <SBtn_100_30
                             onClick={() => {
-                                console.log(fileBtn);
                                 fileBtn?.current.click();
                             }}
                         >
                             파일찾기
                         </SBtn_100_30>
-                        <SRMImgPreview>hahaha</SRMImgPreview>
+                        <SRMImgPreview>
+                            <AiOutlineFileImage />
+                        </SRMImgPreview>
                     </SRMRightSide>
                 </SRMCol>
                 <SRMCol>
@@ -133,7 +169,7 @@ function Regist() {
                         <SRMCol key={idx}>
                             <SRMLeftSide>{name}</SRMLeftSide>
                             <SRMRightSide>
-                                <ElementTag placeholder={placeholder} placeRow={placeRow} />
+                                <ElementTag placeholder={placeholder} placeRow={placeRow} blurEnvent={setContentsInputData("dashBoard", name)} />
                             </SRMRightSide>
                         </SRMCol>
                     );
@@ -146,7 +182,7 @@ function Regist() {
                         <SRMCol key={idx}>
                             <SRMLeftSide>{name}</SRMLeftSide>
                             <SRMRightSide>
-                                <ElementTag placeholder={placeholder} placeRow={placeRow} />
+                                <ElementTag placeholder={placeholder} placeRow={placeRow} blurEnvent={setContentsInputData("housePaln", name)} />
                             </SRMRightSide>
                         </SRMCol>
                     );
@@ -159,7 +195,7 @@ function Regist() {
                         <SRMCol key={idx}>
                             <SRMLeftSide>{name}</SRMLeftSide>
                             <SRMRightSide>
-                                <ElementTag placeholder={placeholder} placeRow={placeRow} />
+                                <ElementTag placeholder={placeholder} placeRow={placeRow} blurEnvent={setContentsInputData("interior", name)} />
                             </SRMRightSide>
                         </SRMCol>
                     );

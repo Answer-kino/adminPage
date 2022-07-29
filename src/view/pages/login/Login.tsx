@@ -111,19 +111,29 @@ const SloginBtn = styled.div`
 const Login = () => {
     const navigate = useNavigate();
 
+    const handleOnKeyPress = (e: any) => {
+        if (e.key === "Enter") {
+            loginHandler();
+        }
+    };
+
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
     const handleInputLoginValue = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginInfo({ ...loginInfo, [key]: e.target.value });
     };
 
     const loginHandler = async () => {
-        const res = await CustomAxios.post(Config.admin.login, loginInfo);
-        if (res.data.success) {
-            sessionStorage.setItem("accessToken", res.data.data.accessToken);
-            sessionStorage.setItem("checkSum", res.data.data.checkSum);
-            navigate("/home");
+        if (loginInfo.email === "" || loginInfo.password === "") {
+            return alert("이메일과 패스워드 모두 입력해주세요.");
         } else {
-            alert("로그인 계정이 없습니다.");
+            const res = await CustomAxios.post(Config.admin.login, loginInfo);
+            if (res.data.success) {
+                sessionStorage.setItem("accessToken", res.data.data.accessToken);
+                sessionStorage.setItem("checkSum", res.data.data.checkSum);
+                navigate("/home");
+            } else {
+                return alert("로그인 계정이 없습니다.");
+            }
         }
     };
 
@@ -140,11 +150,16 @@ const Login = () => {
                     <SloginInputBox>
                         <SloginInputBox_box>
                             <SloginInputBox_box_title>아이디</SloginInputBox_box_title>
-                            <SloginInputBox_box_input type="email" placeholder="아이디를 입력해주세요" onChange={handleInputLoginValue("email")} />
+                            <SloginInputBox_box_input type="email" placeholder="아이디를 입력해주세요" onChange={handleInputLoginValue("email")} onKeyPress={handleOnKeyPress} />
                         </SloginInputBox_box>
                         <SloginInputBox_box>
                             <SloginInputBox_box_title>비밀번호</SloginInputBox_box_title>
-                            <SloginInputBox_box_input type="password" placeholder="비밀번호를 입력해주세요" onChange={handleInputLoginValue("password")} />
+                            <SloginInputBox_box_input
+                                type="password"
+                                placeholder="비밀번호를 입력해주세요"
+                                onChange={handleInputLoginValue("password")}
+                                onKeyPress={handleOnKeyPress}
+                            />
                         </SloginInputBox_box>
                     </SloginInputBox>
                     {/* <ScheckBox>

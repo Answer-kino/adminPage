@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Auth from "@src/model/common/Auth";
 import {
     SDivider,
     SLink,
@@ -19,21 +21,19 @@ import {
 } from "./styles";
 
 import { linksArray, secondaryLinksArray } from "@src/nav";
-
 import { Marker_S } from "@src/assets/brands/export";
-
 import { AiOutlineAudit, AiOutlineDatabase, AiOutlineHome, AiOutlineLeft, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineTeam } from "react-icons/ai";
 
 import { ThemeContext } from "@src/App";
-import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Sidebar = ({ children }: any) => {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
     const searchRef = useRef<any>();
     const { setTheme, theme } = useContext(ThemeContext);
     const [siderbarOpen, setSiderbarOpen] = useState(false);
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
+
     const searchClickHandler = () => {
         if (!siderbarOpen) {
             setSiderbarOpen(true);
@@ -43,6 +43,12 @@ const Sidebar = ({ children }: any) => {
             console.log("hi");
         }
     };
+
+    useEffect(() => {
+        const auth = Auth.getInstance();
+        if (!auth.checkSession()) navigate("/login");
+        return;
+    }, []);
 
     return (
         <SSidebar isOpen={siderbarOpen}>
@@ -104,8 +110,8 @@ const Sidebar = ({ children }: any) => {
                         <SLink to="" style={!siderbarOpen ? { width: "fit-content" } : {}}>
                             <SLinkIcon
                                 onClick={() => {
-                                    console.log("hi");
                                     sessionStorage.clear();
+                                    navigate("/login");
                                 }}
                             >
                                 {icon}

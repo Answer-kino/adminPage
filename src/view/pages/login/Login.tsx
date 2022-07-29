@@ -149,10 +149,10 @@ const Login = () => {
                             />
                         </SloginInputBox_box>
                     </SloginInputBox>
-                    <ScheckBox>
+                    {/* <ScheckBox>
                         <ScheckBox_inputBox type="checkbox" id="individual" onClick={e => checkLogin(e)} />
                         <ScheckBox_box>로그인 유지</ScheckBox_box>
-                    </ScheckBox>
+                    </ScheckBox> */}
                 </SloginContent>
                 <SloginBtn>로그인</SloginBtn>
             </SloginBox>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SDivider } from "@src/component/Sidebar/styles";
 import { STableContainer, STable, STableHead, STableHeader, STableBody, STableRow, STableData, STableButton } from "@src/assets/style/view/view";
 
-function Detail(pros) {
+function Detail(pros: any) {
     useEffect(() => {
         console.log(pros);
     }, [pros]);

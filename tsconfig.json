@@ -14,7 +14,7 @@
         "emitDecoratorMetadata": true,
         "module": "esnext",
         "rootDir": "src",
-        "moduleResolution": "Node16",
+        "moduleResolution": "node",
         "resolveJsonModule": true,
         "allowJs": true,
         "outDir": "./dist",

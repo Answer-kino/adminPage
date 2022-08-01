@@ -1,7 +1,7 @@
 import { Config } from "../common/Config";
 import CustomAxios from "../common/CustomAxios";
 
-const { list, regist, label } = Config.admin.contents;
+const { list, regist, hashTag } = Config.admin.contents;
 export class Contents {
     static List = async ({ isLimit, isOffset, isActive }: any) => {
         let apiUrl = list;
@@ -13,6 +13,13 @@ export class Contents {
 
         const { data } = await CustomAxios.get(apiUrl);
 
+        return data.data;
+    };
+
+    static HashTag = async () => {
+        const apiUrl = hashTag;
+
+        const { data } = await CustomAxios.get(apiUrl);
         return data.data;
     };
 }

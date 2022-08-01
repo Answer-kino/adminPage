@@ -3,7 +3,9 @@ export const Config = {
     server: {
         admin: "http://api.cm.house/admin/"
     },
-
+    fileSize: {
+        imgs: 5242880
+    },
     mimeType: {
         contents: ["image/jpeg", "image/png"]
     },
@@ -26,7 +28,7 @@ export const Config = {
         contents: {
             regist: "building/regist",
             list: "building/list",
-            label: "building/label",
+            hashTag: "building/label",
             detail: "building/:ideaIdx/select".split(":ideaIdx"),
             update: "building/:ideaIdx/update".split(":ideaIdx"),
             delete: "building/:ideaIdx/delete".split(":ideaIdx")

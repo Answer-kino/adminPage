@@ -42,7 +42,6 @@ function View() {
     };
 
     const getList = async () => {
-        console.log(isActive);
         const { data, count } = await Contents.List({ isLimit, isOffset, isActive });
         const { active, totalCount, unActive } = count[0];
         setIsCount({ totalCount, active, unActive });

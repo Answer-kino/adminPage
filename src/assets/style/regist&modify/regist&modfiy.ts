@@ -45,6 +45,7 @@ export const SRMImgPreview = styled.div`
     border: 1px dashed ${({ theme }) => theme.borderLine};
     background: ${({ theme }) => theme.bg};
     font-size: 20px;
+    overflow-y: scroll;
 `;
 
 export const SRMFooter = styled.div`

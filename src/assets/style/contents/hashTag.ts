@@ -7,6 +7,11 @@ export const SHashTagContainer = styled.section`
     gap: 5px;
 `;
 
+export const SHashTagTitle = styled.p`
+    font-size: 20px;
+    font-weight: 600;
+`;
+
 export const SHashTagBox = styled.div`
     width: 23%;
     height: 40px;

@@ -20,4 +20,8 @@ export const SBtn_100_30 = styled.button`
     :hover {
         background: ${({ theme }) => theme.bg4};
     }
+
+    :active {
+        background: ${({ theme }) => theme.bg2};
+    }
 `;
